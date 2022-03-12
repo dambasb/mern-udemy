@@ -5,7 +5,7 @@ import db from "./db.js";
 import usersRoute from "./routes/users.js";
 import authRoute from "./routes/auth.js";
 import postsRoute from "./routes/posts.js";
-import profileRoute from "./routes/users.js";
+import profileRoute from "./routes/profile.js";
 
 const app = express();
 
