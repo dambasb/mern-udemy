@@ -44,6 +44,8 @@ img {
 /* Error text*/
 .text-error {
   color: red;
+  padding-bottom: 10px;
+  font-size: 0.9em;
 }
 
 /* Invalid input */
