@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setAlert } from "../../../actions/alert";
+import PropTypes from "prop-types";
 import useInput from "../../../hooks/use-input";
 import "./Register.css";
 
-const Register = () => {
+const Register = ({ setAlert }) => {
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -64,9 +67,11 @@ const Register = () => {
       !enteredConfirmPasswordIsValid &&
       enteredPassword !== enteredConfirmPassword
     )
-      return;
+      return setAlert("Form is invalid", "danger");
 
     console.log(enteredEmail, enteredPassword);
+
+    setAlert("You have successfully registered", "success");
 
     resetNameInput();
     resetEmailInput();
@@ -141,8 +146,8 @@ const Register = () => {
         <div className={confirmPasswordInputClasses}>
           <input
             type="password"
-            id="password"
-            placeholder="Password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
             onChange={confirmPasswordChangedHandler}
             onBlur={confirmPasswordBlurHandler}
             value={enteredConfirmPassword}
@@ -168,4 +173,10 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.prototype = {
+  setAlert: PropTypes.func.isRequired,
+};
+
+// use connect to work with redux
+// export setAlert so it's available as props
+export default connect(null, { setAlert })(Register);
