@@ -66,8 +66,10 @@ const Register = ({ setAlert }) => {
       !enteredPasswordIsValid &&
       !enteredConfirmPasswordIsValid &&
       enteredPassword !== enteredConfirmPassword
-    )
-      return setAlert("Form is invalid", "danger");
+    ) {
+      setAlert("Form is invalid", "danger");
+      return;
+    }
 
     console.log(enteredEmail, enteredPassword);
 

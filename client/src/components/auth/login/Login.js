@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setAlert } from "../../../actions/alert";
+import PropTypes from "prop-types";
 import useInput from "../../../hooks/use-input";
 import "./Login.css";
 
-const Login = () => {
+const Login = ({ setAlert }) => {
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -33,9 +36,14 @@ const Login = () => {
   const formSubmissionHandler = (event) => {
     event.preventDefault();
 
-    if (!enteredEmailIsValid && !enteredPasswordIsValid) return;
+    if (!enteredEmailIsValid && !enteredPasswordIsValid) {
+      setAlert("Form is invalid", "danger");
+      return;
+    }
 
     console.log(enteredEmail, enteredPassword);
+
+    setAlert("You have successfully Logged in", "success");
 
     resetNameInput();
     resetPasswordInput();
@@ -79,6 +87,11 @@ const Login = () => {
           {passwordInputHasError && (
             <p className="text-error">Please enter your Password.</p>
           )}
+          {enteredPassword.length > 0 && enteredPassword.length < 6 && (
+            <p className="text-error">
+              Password must contain at last 6 characters.
+            </p>
+          )}
         </div>
         <button disabled={!formIsValid}>Submit</button>
 
@@ -93,4 +106,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.prototype = {
+  setAlert: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setAlert })(Login);
