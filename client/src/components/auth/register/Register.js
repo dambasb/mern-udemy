@@ -2,11 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../../actions/alert";
+import { register } from "../../../actions/auth";
 import PropTypes from "prop-types";
 import useInput from "../../../hooks/use-input";
 import "./Register.css";
+import Alert from "../../alert/Alert";
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -57,7 +59,7 @@ const Register = ({ setAlert }) => {
   }
 
   // Submit form
-  const formSubmissionHandler = (event) => {
+  const formSubmissionHandler = async (event) => {
     event.preventDefault();
 
     if (
@@ -67,12 +69,17 @@ const Register = ({ setAlert }) => {
       !enteredConfirmPasswordIsValid &&
       enteredPassword !== enteredConfirmPassword
     ) {
-      setAlert("Form is invalid", "danger");
+      //setAlert("Form is invalid", "danger");
       return;
     }
 
-    console.log(enteredEmail, enteredPassword);
+    console.log(enteredName, enteredEmail, enteredPassword);
 
+    register({
+      name: enteredName,
+      email: enteredEmail,
+      password: enteredPassword,
+    });
     setAlert("You have successfully registered", "success");
 
     resetNameInput();
@@ -99,6 +106,7 @@ const Register = ({ setAlert }) => {
 
   return (
     <div className="register">
+      <Alert />
       <form onSubmit={formSubmissionHandler}>
         <h1>Sing Up</h1>
         <div className={nameInputClasses}>
@@ -109,6 +117,7 @@ const Register = ({ setAlert }) => {
             onChange={nameChangedHandler}
             onBlur={nameBlurHandler}
             value={enteredName}
+            required
           />
           {nameInputHasError && (
             <p className="text-error">Please enter your Name.</p>
@@ -122,6 +131,7 @@ const Register = ({ setAlert }) => {
             onChange={emailChangedHandler}
             onBlur={emailBlurHandler}
             value={enteredEmail}
+            required
           />
           {emailInputHasError && (
             <p className="text-error">Please enter valid Email.</p>
@@ -135,6 +145,8 @@ const Register = ({ setAlert }) => {
             onChange={passwordChangedHandler}
             onBlur={passwordBlurHandler}
             value={enteredPassword}
+            required
+            minLength="6"
           />
           {passwordInputHasError && (
             <p className="text-error">Please enter your Password.</p>
@@ -153,6 +165,8 @@ const Register = ({ setAlert }) => {
             onChange={confirmPasswordChangedHandler}
             onBlur={confirmPasswordBlurHandler}
             value={enteredConfirmPassword}
+            required
+            minLength="6"
           />
           {confirmPasswordInputHasError && (
             <p className="text-error">Please enter your Password.</p>
@@ -165,7 +179,7 @@ const Register = ({ setAlert }) => {
         <button disabled={!formIsValid}>Submit</button>
 
         <h4>
-          <span className="register__grey">Already have account?</span>
+          <span className="register__grey">Already have account? </span>
           <Link className="register__link" to="/login">
             Login.
           </Link>
@@ -177,8 +191,9 @@ const Register = ({ setAlert }) => {
 
 Register.prototype = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 // use connect to work with redux
 // export setAlert so it's available as props
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);

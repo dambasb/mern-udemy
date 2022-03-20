@@ -5,6 +5,7 @@ import { setAlert } from "../../../actions/alert";
 import PropTypes from "prop-types";
 import useInput from "../../../hooks/use-input";
 import "./Login.css";
+import Alert from "../../alert/Alert";
 
 const Login = ({ setAlert }) => {
   const {
@@ -60,6 +61,7 @@ const Login = ({ setAlert }) => {
 
   return (
     <div className="login">
+      <Alert />
       <form onSubmit={formSubmissionHandler}>
         <h1>Login</h1>
         <div className={emailInputClasses}>

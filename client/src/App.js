@@ -4,7 +4,6 @@ import Navbar from "./components/navbar/Navbar";
 import Landing from "./components/landing/Landing";
 import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
-import Alert from "./components/alert/Alert";
 import "./App.css";
 
 // Redux
@@ -16,7 +15,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         {/* <Navbar /> */}
-        <Alert />
+
         <Router>
           <Switch>
             <Landing exact path="/" />
