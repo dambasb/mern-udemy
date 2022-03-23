@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../../actions/alert";
 import { register } from "../../../actions/auth";
@@ -8,7 +8,7 @@ import useInput from "../../../hooks/use-input";
 import "./Register.css";
 import Alert from "../../alert/Alert";
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -104,6 +104,11 @@ const Register = ({ setAlert, register }) => {
     ? "form-control invalid"
     : "form-control";
 
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="dashboard" />;
+  }
+
   return (
     <div className="register">
       <Alert />
@@ -192,8 +197,13 @@ const Register = ({ setAlert, register }) => {
 Register.prototype = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
 // use connect to work with redux
 // export setAlert so it's available as props
-export default connect(null, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register })(Register);

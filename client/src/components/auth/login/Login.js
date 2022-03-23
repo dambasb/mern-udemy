@@ -1,13 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../../actions/alert";
 import PropTypes from "prop-types";
 import useInput from "../../../hooks/use-input";
 import "./Login.css";
 import Alert from "../../alert/Alert";
+import { login } from "../../../actions/auth";
 
-const Login = ({ setAlert }) => {
+const Login = ({ setAlert, login, isAuthenticated }) => {
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -42,7 +43,10 @@ const Login = ({ setAlert }) => {
       return;
     }
 
-    console.log(enteredEmail, enteredPassword);
+    login({
+      email: enteredEmail,
+      password: enteredPassword,
+    });
 
     setAlert("You have successfully Logged in", "success");
 
@@ -58,6 +62,11 @@ const Login = ({ setAlert }) => {
   const passwordInputClasses = passwordInputHasError
     ? "form-control invalid"
     : "form-control";
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="dashboard" />;
+  }
 
   return (
     <div className="login">
@@ -110,6 +119,11 @@ const Login = ({ setAlert }) => {
 
 Login.prototype = {
   setAlert: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, { setAlert })(Login);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, login })(Login);
