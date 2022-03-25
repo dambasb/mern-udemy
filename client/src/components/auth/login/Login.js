@@ -107,7 +107,7 @@ const Login = ({ setAlert, login, isAuthenticated }) => {
         <button disabled={!formIsValid}>Submit</button>
 
         <h4>
-          <span className="login__grey">New to Social App?</span>
+          <span className="login__grey">New to Social App? </span>
           <Link className="login__link" to="/register">
             Sing Up now.
           </Link>

@@ -4,6 +4,7 @@ header {
   align-items: center;
   padding: 10px 10px;
   background-color: #2f4154;
+  height: 50px;
 }
 
 h1 {
@@ -32,19 +33,4 @@ h1 {
 .nav__links li a:hover {
   transition: all 0.3s ease 0s;
   color: #85b7ed;
-}
-
-button {
-  padding: 5px 20px;
-  background-color: rgb(51, 0, 51, 1);
-  border: none;
-  border-radius: 50px;
-  transition: all 0.3s ease 0s;
-  color: white;
-}
-
-button:hover {
-  transition: all 0.3s ease 0s;
-  background-color: #85b7ed;
-  color: white;
 }

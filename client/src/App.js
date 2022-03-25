@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-import Navbar from "./components/navbar/Navbar";
+import React, { Fragment, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Landing from "./components/landing/Landing";
 import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
@@ -12,6 +11,8 @@ import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./actions/auth";
 import Dashboard from "./components/dashboard/Dashboard";
+import { Navbar } from "./components/navbar/Navbar";
+import PrivateRoute from "./components/routing/PrivateRoute";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -26,15 +27,14 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Switch>
-          <Landing exact path="/" />
-          <Login path="/login" />
-          <Register path="/register" />
-        </Switch>
-        <Switch>
-          <Navbar />
-          <Dashboard path="/dashboard" />
-        </Switch>
+        <Fragment>
+          <Route exact path="/" component={Landing} />
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
+          </Switch>
+        </Fragment>
       </Router>
     </Provider>
   );
