@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Landing from "./components/landing/Landing";
 import Login from "./components/auth/login/Login";
 import Register from "./components/auth/register/Register";
+import Dashboard from "./components/dashboard/Dashboard";
+import PrivateRoute from "./components/routing/PrivateRoute";
 import "./App.css";
 
 // Redux
@@ -10,9 +12,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./actions/auth";
-import Dashboard from "./components/dashboard/Dashboard";
-import { Navbar } from "./components/navbar/Navbar";
-import PrivateRoute from "./components/routing/PrivateRoute";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
