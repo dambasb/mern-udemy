@@ -8,6 +8,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGOUT,
 } from "./types";
 
 // Register User
@@ -85,3 +86,8 @@ export const login =
       });
     }
   };
+
+// Logout
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+};

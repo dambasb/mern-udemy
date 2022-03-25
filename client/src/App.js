@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./actions/auth";
+import Dashboard from "./components/dashboard/Dashboard";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -25,15 +26,15 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        {/* <Navbar /> */}
-
-        <Router>
-          <Switch>
-            <Landing exact path="/" />
-            <Login path="/login" />
-            <Register path="/register" />
-          </Switch>
-        </Router>
+        <Switch>
+          <Landing exact path="/" />
+          <Login path="/login" />
+          <Register path="/register" />
+        </Switch>
+        <Switch>
+          <Navbar />
+          <Dashboard path="/dashboard" />
+        </Switch>
       </Router>
     </Provider>
   );

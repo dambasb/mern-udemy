@@ -24,6 +24,7 @@ body {
 a {
   color: var(--primary-color);
   text-decoration: none;
+  box-sizing: border-box;
 }
 
 ul {
