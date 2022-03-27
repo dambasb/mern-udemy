@@ -7,6 +7,9 @@ import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import CreateProfile from "./components/profile-forms/createProfile/CreateProfile";
 import EditProfile from "./components/profile-forms/editProfile/EditProfile";
+import AddExperience from "./components/profile-forms/addExperience/addExperience";
+import AddEducation from "./components/profile-forms/addEducation/AddEducation";
+
 import "./App.css";
 
 // Redux
@@ -20,7 +23,6 @@ if (localStorage.token) {
 }
 
 const App = () => {
-  console.log(localStorage.profile);
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
@@ -28,16 +30,16 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Fragment>
+        <Switch>
           <Route exact path="/" component={Landing} />
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
-            <PrivateRoute path="/create-profile" component={CreateProfile} />
-            <PrivateRoute path="/edit-profile" component={EditProfile} />
-          </Switch>
-        </Fragment>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/create-profile" component={CreateProfile} />
+          <PrivateRoute path="/edit-profile" component={EditProfile} />
+          <PrivateRoute path="/add-experience" component={AddExperience} />
+          <PrivateRoute path="/add-education" component={AddEducation} />
+        </Switch>
       </Router>
     </Provider>
   );

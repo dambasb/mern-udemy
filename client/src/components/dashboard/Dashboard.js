@@ -18,14 +18,14 @@ const Dashboard = ({
   }, []);
 
   return (
-    <div>
+    <Fragment>
       <Navbar />
       <div className="container">
         {loading && profile === null ? (
           <Spinner />
         ) : (
           <Fragment>
-            <h1>Dashboard</h1>
+            <h1 className="large text-primary">Dashboard</h1>
             <p>Welcome {user && user.name}</p>
 
             {profile !== null ? (
@@ -41,7 +41,7 @@ const Dashboard = ({
           </Fragment>
         )}
       </div>
-    </div>
+    </Fragment>
   );
 };
 
