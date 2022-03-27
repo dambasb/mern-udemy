@@ -1,11 +1,18 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import Navbar from "../navbar/Navbar";
+import Spinner from "../spinner/Spinner";
 import "./Dashboard.css";
+import { Link } from "react-router-dom";
+import DashboardActions from "./DashboardActions";
 
-const Dashboard = ({ getCurrentProfile, auth, profile }) => {
+const Dashboard = ({
+  getCurrentProfile,
+  auth: { user },
+  profile: { profile, loading },
+}) => {
   useEffect(() => {
     getCurrentProfile();
   }, []);
@@ -13,7 +20,27 @@ const Dashboard = ({ getCurrentProfile, auth, profile }) => {
   return (
     <div>
       <Navbar />
-      <div className="container">Dashboard</div>
+      <div className="container">
+        {loading && profile === null ? (
+          <Spinner />
+        ) : (
+          <Fragment>
+            <h1>Dashboard</h1>
+            <p>Welcome {user && user.name}</p>
+
+            {profile !== null ? (
+              <Fragment>
+                <DashboardActions />
+              </Fragment>
+            ) : (
+              <Fragment>
+                <p>You have not setup a profile, please add some info.</p>
+                <Link to="/create-profile">Create Profile</Link>
+              </Fragment>
+            )}
+          </Fragment>
+        )}
+      </div>
     </div>
   );
 };
