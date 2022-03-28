@@ -6,7 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_PROFILE,
+  DELETE_ACCOUNT,
 } from "../actions/types";
 
 const initialState = {
@@ -33,6 +33,7 @@ const auth = (state = initialState, action) => {
     case REGISTER_FAIL:
     case LOGIN_FAIL:
     case LOGOUT:
+    case DELETE_ACCOUNT:
       localStorage.removeItem("token");
       return {
         ...state,
@@ -42,13 +43,6 @@ const auth = (state = initialState, action) => {
       };
     case USER_LOADED:
       return { ...state, isAuthenticated: true, loading: false, user: payload };
-    case CLEAR_PROFILE:
-      return {
-        ...state,
-        profile: null,
-        repos: [],
-        loading: false,
-      };
 
     default:
       return state;
