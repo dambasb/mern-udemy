@@ -6,6 +6,7 @@ import { getProfileById } from "../../actions/profile";
 import Navbar from "../navbar/Navbar";
 import "./Profile.css";
 import { Link, useParams } from "react-router-dom";
+import ProfileTop from "./ProfileTop";
 
 const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
   const { id } = useParams();
@@ -24,7 +25,6 @@ const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
             <Link to="/profiles" className="btn btn-light">
               Back To Profiles
             </Link>
-            {console.log("PROFILE:", profile)}
             {auth.isAuthenticated &&
             auth.loading === false &&
             auth.user._id === profile?.user._id ? (
@@ -32,6 +32,7 @@ const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
                 Edit Profile
               </Link>
             ) : null}
+            <ProfileTop />
           </div>
         </Fragment>
       )}

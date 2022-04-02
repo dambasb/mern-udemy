@@ -1,21 +1,12 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
-const ProfileTop = ({
-  profile: {
-    status,
-    company,
-    location,
-    website,
-    social,
-    user: { name, avatar },
-  },
-}) => {
-  //console.log(profile);
+const ProfileTop = ({ profile }) => {
+  console.log(profile);
   return (
     <Fragment>
       <div className="profile-top bg-primary p-2">
-        <img className="round-img my-1" src={avatar} alt="" />
+        <img className="round-img my-1" src="avatar" alt="" />
         <h1 className="large">John Doe</h1>
         <p className="lead">Developer at Microsoft</p>
         <p>Seattle, WA</p>

@@ -1,5 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import db from "./db.js";
 import usersRoute from "./routes/users.js";
@@ -10,8 +9,7 @@ import profileRoute from "./routes/profile.js";
 const app = express();
 
 // Init Middleware
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(express.json());
 
 // Define Routes
 app.use("/api/users", usersRoute);

@@ -117,8 +117,8 @@ const Login = ({ setAlert, login, isAuthenticated }) => {
   );
 };
 
-Login.prototype = {
-  setAlert: PropTypes.func.isRequired,
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
