@@ -2,7 +2,7 @@ import express from "express";
 import { check, validationResult } from "express-validator";
 import auth from "../middleware/auth.js";
 import User from "../models/User.js";
-import Post from "../models/post.js";
+import Post from "../models/Post.js";
 const router = express.Router();
 
 // @route   POST api/posts
