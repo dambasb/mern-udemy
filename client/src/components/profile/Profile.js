@@ -17,7 +17,7 @@ const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
   return (
     <Fragment>
       <Navbar />
-      {loading ? (
+      {profile === null ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -32,7 +32,7 @@ const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
                 Edit Profile
               </Link>
             ) : null}
-            <ProfileTop />
+            <ProfileTop profile={profile} />
           </div>
         </Fragment>
       )}
