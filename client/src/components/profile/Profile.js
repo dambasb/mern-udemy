@@ -13,7 +13,6 @@ const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
     getProfileById(id);
   }, [getProfileById, id]);
 
-  console.log("params", id);
   return (
     <Fragment>
       <Navbar />
@@ -25,7 +24,6 @@ const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
             <Link to="/profiles" className="btn btn-light">
               Back To Profiles
             </Link>
-            {console.log("AUTH:", auth)}
             {console.log("PROFILE:", profile)}
             {auth.isAuthenticated &&
             auth.loading === false &&

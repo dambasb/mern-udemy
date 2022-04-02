@@ -5,6 +5,7 @@ import Spinner from "../spinner/Spinner";
 import { getProfiles } from "../../actions/profile";
 import Navbar from "../navbar/Navbar";
 import ProfileItem from "./ProfileItem";
+import "./Profile.css";
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
