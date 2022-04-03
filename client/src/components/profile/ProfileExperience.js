@@ -1,43 +1,29 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import Moment from "react-moment";
 
-const ProfileExperience = (props) => {
+const ProfileExperience = ({
+  experience: { company, title, location, current, to, from, description },
+}) => {
   return (
-    <Fragment>
-      <div className="profile-exp bg-white p-2">
-        <h2 className="text-primary">Experience</h2>
-        <div>
-          <h3 className="text-dark">Microsoft</h3>
-          <p>Oct 2011 - Current</p>
-          <p>
-            <strong>Position: </strong>Senior Developer
-          </p>
-          <p>
-            <strong>Description: </strong>Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Dignissimos placeat, dolorum ullam ipsam, sapiente
-            suscipit dicta eius velit amet aspernatur asperiores modi quidem
-            expedita fugit.
-          </p>
-        </div>
-        <div>
-          <h3 className="text-dark">Sun Microsystems</h3>
-          <p>Nov 2004 - Nov 2011</p>
-          <p>
-            <strong>Position: </strong>Systems Admin
-          </p>
-          <p>
-            <strong>Description: </strong>Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Dignissimos placeat, dolorum ullam ipsam, sapiente
-            suscipit dicta eius velit amet aspernatur asperiores modi quidem
-            expedita fugit.
-          </p>
-        </div>
-      </div>
-      s
-    </Fragment>
+    <div>
+      <h3 className="text-dark">{company}</h3>
+      <p>
+        <Moment format="YYYY/MM/DD">{from}</Moment> -{" "}
+        {!to ? "Now" : <Moment format="YYYY/MM/DD">{to}</Moment>}
+      </p>
+      <p>
+        <strong>Position: </strong>
+        {title}
+      </p>
+      <p>
+        <strong>Description: </strong>
+        {description}
+      </p>
+    </div>
   );
 };
 
-ProfileExperience.propTypes = {};
+ProfileExperience.propTypes = { experience: PropTypes.object.isRequired };
 
 export default ProfileExperience;
