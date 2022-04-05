@@ -6,6 +6,7 @@ import Spinner from "../spinner/Spinner";
 import "./Posts.css";
 import Navbar from "../navbar/Navbar";
 import PostItem from "./PostItem";
+import PostForm from "./PostForm";
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
@@ -22,22 +23,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
         <p className="lead">
           <i className="fas fa-user"></i> Welcome to the community!
         </p>
-        <div className="post-form">
-          <div className="bg-primary p">
-            <h3>Say Something...</h3>
-          </div>
-          <form className="form my-1">
-            <textarea
-              name="text"
-              cols="30"
-              rows="5"
-              placeholder="Create a post"
-              required
-            ></textarea>
-            <input type="submit" className="btn btn-dark my-1" value="Submit" />
-          </form>
-        </div>
-
+        <PostForm />
         <div className="posts">
           {posts.map((post) => (
             <PostItem key={post._id} post={post} />

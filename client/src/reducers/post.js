@@ -1,4 +1,10 @@
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES } from "../actions/types";
+import {
+  ADD_POST,
+  DELETE_POST,
+  GET_POSTS,
+  POST_ERROR,
+  UPDATE_LIKES,
+} from "../actions/types";
 
 const initialState = {
   posts: [],
@@ -17,6 +23,21 @@ const postReducer = (state = initialState, action) => {
         posts: payload,
         loading: false,
       };
+    case ADD_POST:
+      return {
+        ...state,
+        // ...state.posts - add copy of our posts and then add new post (payload)
+        posts: [payload, ...state.posts],
+        loading: false,
+      };
+    case DELETE_POST:
+      return {
+        ...state,
+        // to immediately remove post from UI
+        posts: state.posts.filter((post) => post._id !== payload),
+        loading: false,
+      };
+
     case POST_ERROR:
       return {
         ...state,
